@@ -3221,7 +3221,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -3299,6 +3299,12 @@ react-devtools-core@^2.5.0:
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
+
+"react-native-flip-toggle-button@https://github.com/ashishpandey001/react-native-flip-toggle-button#master":
+  version "1.0.0"
+  resolved "https://github.com/ashishpandey001/react-native-flip-toggle-button#5af4a2a8db8e2d9fd09aa27fc0e43a558c7db78b"
+  dependencies:
+    prop-types "^15.5.7"
 
 react-native@0.50.4:
   version "0.50.4"
