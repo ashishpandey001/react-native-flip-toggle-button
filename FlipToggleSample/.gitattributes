@@ -1,2 +1,2 @@
 *.pbxproj -text
-Screenshot_1512127353.png filter=lfs diff=lfs merge=lfs -text
+sample_image.png filter=lfs diff=lfs merge=lfs -text
