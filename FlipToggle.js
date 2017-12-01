@@ -54,7 +54,8 @@ class ToggleSwitch extends React.Component {
     sliderHeight: PropTypes.number,
     sliderRadius: PropTypes.number,
     margin: PropTypes.number,
-    labelStyle: PropTypes.object
+    labelStyle: PropTypes.object,
+    onToggle: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -102,7 +103,7 @@ class ToggleSwitch extends React.Component {
       ),
       sliderWidth: sliderWidth,
       sliderHeight: sliderHeight,
-      sliderRadius: parseInt(sliderRadius / 100 * this.props.sliderWidth),
+      sliderRadius: parseInt(sliderRadius / 100 * sliderWidth),
       margin: margin,
       translateX: 2 * parseInt(margin) + sliderWidth
     };
