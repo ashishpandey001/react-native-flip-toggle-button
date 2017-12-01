@@ -9,7 +9,7 @@
 	"dependencies": {
 		"react": "16.0.0",
 		"react-native": "0.50.4",
-		"react-native-flip-toggle-button": "https://github.com/ashishpandey001/react-native-flip-toggle-button#master"
+		"react-native-flip-toggle-button": "^1.0.1"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",

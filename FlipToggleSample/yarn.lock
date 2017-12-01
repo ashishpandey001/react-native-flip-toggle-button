@@ -3300,9 +3300,9 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-"react-native-flip-toggle-button@https://github.com/ashishpandey001/react-native-flip-toggle-button#master":
-  version "1.0.0"
-  resolved "https://github.com/ashishpandey001/react-native-flip-toggle-button#5af4a2a8db8e2d9fd09aa27fc0e43a558c7db78b"
+react-native-flip-toggle-button@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-flip-toggle-button/-/react-native-flip-toggle-button-1.0.1.tgz#e67f1f32eb973dc6f3f1276bb24af4cdf237d7e7"
   dependencies:
     prop-types "^15.5.7"
 
