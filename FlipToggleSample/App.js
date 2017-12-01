@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import FlipToggle from 'react-native-flip-toggle-button';
+import FlipToggle from './FlipToggle';
 
 export default class App extends Component<{}> {
   render() {
@@ -40,9 +40,11 @@ export default class App extends Component<{}> {
         <View style={styles.item}>
           <Text>Rounded Wide toggle button</Text>
           <FlipToggle
-            buttonWidth={400}
+            buttonWidth={150}
             buttonHeight={25}
             buttonRadius={50}
+            onLabel={'yay!'}
+            offLabel={'nay!'}
             onToggle={() => {
               console.log();
             }}
@@ -57,6 +59,8 @@ export default class App extends Component<{}> {
             buttonHeight={50}
             sliderWidth={20}
             sliderHeight={30}
+            buttonOffColor={'#666'}
+            sliderOffColor={'#fff'}
             onToggle={() => {
               console.log();
             }}
@@ -90,6 +94,7 @@ export default class App extends Component<{}> {
             buttonRadius={50}
             onLabel={'on'}
             offLabel={'off'}
+            labelStyle={{ fontSize: 62, color: 'green' }}
             onToggle={() => {
               console.log();
             }}
@@ -103,9 +108,13 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   item: {
-    marginVertical: 5
+    marginVertical: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
