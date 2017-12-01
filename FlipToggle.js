@@ -23,6 +23,15 @@ class ToggleSwitch extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
+    let labelStyle = {};
+    if (!this.props.labelStyle.fontSize) {
+      labelStyle = {
+        ...this.props.labelStyle,
+        fontSize: 0.1 * this.props.buttonWidth
+      };
+    } else {
+      labelStyle = { ...this.props.labelStyle };
+    }
     this.state = {
       isOn: this.props.isOn,
       onLabel: this.props.onLabel,
@@ -34,7 +43,7 @@ class ToggleSwitch extends React.Component {
       sliderOnColor: this.props.sliderOnColor,
       sliderOffColor: this.props.sliderOffColor,
       dimensions: {},
-      labelStyle: this.props.labelStyle
+      labelStyle: labelStyle
     };
     this.calculateDimensions();
   }
@@ -68,8 +77,7 @@ class ToggleSwitch extends React.Component {
     buttonRadius: 0,
     sliderRadius: 0,
     labelStyle: {
-      color: 'white',
-      fontSize: 16
+      color: 'white'
     }
   };
 
