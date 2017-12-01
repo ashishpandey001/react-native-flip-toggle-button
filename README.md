@@ -1,6 +1,9 @@
 # react-native-flip-toggle-button
 A cross-platform customisable toggle button built upon react-native's TouchableOpacity and Animated APIs.
+
+
 Why flip toggle?
+
 Well, this toggle button  provides a label centered within the button which flips as per the toggle's on / off state.
 You have seen it on old iOS homescreen (swipe to unlock)
 
@@ -15,7 +18,7 @@ You have seen it on old iOS homescreen (swipe to unlock)
 1. Run `yarn add react-native-flip-toggle-button` or `npm i react-native-flip-toggle-button --save`.
 2. Add `import FlipToggle from 'react-native-flip-toggle-button'` in your react-native application's source code.  
 ## Demo
-- [FlipToggleSample](https://github.com/ashishpandey001/react-native-flip-toggle-button/FlipToggleSample)
+- [FlipToggleSample](https://github.com/ashishpandey001/react-native-flip-toggle-button/tree/master/FlipToggleSample)
 
 <img src="https://media.githubusercontent.com/media/ashishpandey001/react-native-flip-toggle-button/master/FlipToggleSample/sample_image.png" width="360" height="640"/>
 
