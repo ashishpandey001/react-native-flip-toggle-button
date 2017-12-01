@@ -24,7 +24,7 @@ You have seen it on old iOS homescreen (swipe to unlock)
 ## Demo
 - [FlipToggleSample](https://github.com/ashishpandey001/react-native-flip-toggle-button/tree/master/FlipToggleSample)
 
-<img src="https://media.githubusercontent.com/media/ashishpandey001/react-native-flip-toggle-button/master/FlipToggleSample/sample_image.png" width="360" height="640"/>
+<img src="https://media.githubusercontent.com/media/ashishpandey001/react-native-flip-toggle-button/master/FlipToggleSample/react-native-flip-toggle-button.gif" width="360" height="640"/>
 
 ## Getting Started
 import the FlipToggle component into your app's js file.
