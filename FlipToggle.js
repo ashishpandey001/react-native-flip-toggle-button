@@ -61,8 +61,8 @@ class ToggleSwitch extends React.Component {
     isOn: false,
     buttonOnColor: '#000',
     buttonOffColor: '#000',
-    sliderOnColor: '#dba628'
-    sliderOffColor: '#dba628'
+    sliderOnColor: '#dba628',
+    sliderOffColor: '#dba628',
     labelStyle: {},
     buttonRadius: 0,
     sliderRadius: 0,
