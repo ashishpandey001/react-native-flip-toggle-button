@@ -19,7 +19,7 @@ import {
 
 import PropTypes from 'prop-types';
 
-class ToggleSwitch extends React.Component {
+class FlipToggle extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -64,7 +64,9 @@ class ToggleSwitch extends React.Component {
     sliderRadius: PropTypes.number,
     margin: PropTypes.number,
     labelStyle: PropTypes.object,
-    onToggle: PropTypes.func.isRequired
+    changeToggleStateOnLongPress: PropTypes.bool,
+    onToggle: PropTypes.func.isRequired,
+    onToggleLongPress: PropTypes.func
   };
 
   static defaultProps = {
@@ -78,7 +80,8 @@ class ToggleSwitch extends React.Component {
     sliderRadius: 0,
     labelStyle: {
       color: 'white'
-    }
+    },
+    changeToggleStateOnLongPress: true
   };
 
   calculateDimensions = () => {
@@ -118,7 +121,7 @@ class ToggleSwitch extends React.Component {
     this.state.dimensions = dimensions;
   };
 
-  onTogglePress = () => {
+  toggleCommon = () => {
     if (this.props.isOn)
       toValue = this.state.isOn
         ? -this.state.dimensions.buttonWidth + this.state.dimensions.translateX
@@ -136,7 +139,20 @@ class ToggleSwitch extends React.Component {
       ...this.state,
       isOn: newState
     });
+    return newState;
+  };
+
+  onTogglePress = () => {
+    const newState = this.toggleCommon();
     this.props.onToggle(newState);
+  };
+
+  onToggleLongPress = () => {
+    let newState = this.state.isOn;
+    if (this.props.changeToggleStateOnLongPress) {
+      newState = this.toggleCommon();
+    }
+    this.props.onToggleLongPress(newState);
   };
 
   render() {
@@ -154,6 +170,7 @@ class ToggleSwitch extends React.Component {
           }}
           activeOpacity={1}
           onPress={this.onTogglePress}
+          onLongPress={this.onToggleLongPress}
         >
           {this.props.onLabel || this.props.offLabel ? (
             <Text style={[{ alignSelf: 'center' }, this.state.labelStyle]}>
@@ -180,7 +197,7 @@ class ToggleSwitch extends React.Component {
   }
 }
 
-export default ToggleSwitch;
+export default FlipToggle;
 
 const styles = StyleSheet.create({
   container: {
