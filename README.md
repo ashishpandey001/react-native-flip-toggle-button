@@ -41,6 +41,7 @@ Then, use the FlipToggle component as shown below
     offLabel={'Off'}
     labelStyle={{ color: 'black' }}
     onToggle={() => console.log('toggle pressed!')}
+    onToggleLongPress={() => console.log('toggle long pressed!')}
   />
 ```
 ## API
@@ -49,6 +50,8 @@ Then, use the FlipToggle component as shown below
 |buttonWidth|number|yes|n/a|Width of the flip toggle button|
 |buttonHeight|number|yes|n/a|Height of the flip toggle button|
 |onToggle|function|yes|n/a|function that will be executed after toggle state is changed, returns the new state of the toggle|
+|onToggleLongPress|function|no|no|function that will be executed after toggle button is long pressed, returns the new state of the toggle|
+|changeToggleStateOnLongPress|bool|no|true|flag to set whether state of the toggle button should be updated on long press|
 |buttonRadius|number (0 - 100)|no|0|border radius of the flip toggle button, expressed in terms of % of buttonWidth|
 |sliderWidth|number|no|90 % of buttonHeight|Width of the slider|
 |sliderHeight|number|no|90 % of buttonHeight|Height of the slider|
