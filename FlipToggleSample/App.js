@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import FlipToggle from './FlipToggle';
+import FlipToggle from 'react-native-flip-toggle-button';
 
 export default class App extends Component<{}> {
   render() {
