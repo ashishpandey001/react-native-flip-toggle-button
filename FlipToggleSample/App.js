@@ -105,8 +105,12 @@ export default class App extends Component<{}> {
           />
         </View>
         <View style={styles.item}>
-          <Text>Big Fat toggle button</Text>
+          <Text>
+            Big Fat toggle button that is by default turned on and disabled
+          </Text>
           <FlipToggle
+            isOn={true}
+            disabled={true}
             buttonWidth={400}
             buttonHeight={150}
             buttonRadius={50}

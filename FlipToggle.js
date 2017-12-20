@@ -8,7 +8,6 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -71,6 +70,7 @@ class FlipToggle extends React.Component {
 
   static defaultProps = {
     isOn: false,
+    disabled: false,
     buttonOnColor: '#000',
     buttonOffColor: '#000',
     sliderOnColor: '#dba628',
@@ -155,18 +155,33 @@ class FlipToggle extends React.Component {
     this.props.onToggleLongPress(newState);
   };
 
+  setBackgroundColor = component => {
+    if (this.props.disabled) {
+      let key = `${component}Disabled`;
+      let { [key]: data } = styles;
+      return data.backgroundColor;
+    } else if (this.state.isOn) {
+      let key = `${component}OnColor`;
+      let { [key]: data } = this.props;
+      return data;
+    } else {
+      let key = `${component}OffColor`;
+      let { [key]: data } = this.props;
+      return data;
+    }
+  };
+
   render() {
     return (
       <View style={[styles.container]}>
         <TouchableOpacity
+          disabled={this.props.disabled}
           style={{
             justifyContent: 'center',
             borderRadius: this.state.dimensions.buttonRadius,
             height: this.state.dimensions.buttonHeight,
             width: this.state.dimensions.buttonWidth,
-            backgroundColor: this.state.isOn
-              ? this.props.buttonOnColor
-              : this.props.buttonOffColor
+            backgroundColor: this.setBackgroundColor('button')
           }}
           activeOpacity={1}
           onPress={this.onTogglePress}
@@ -186,9 +201,7 @@ class FlipToggle extends React.Component {
               width: this.state.dimensions.sliderWidth,
               height: this.state.dimensions.sliderHeight,
               borderRadius: this.state.dimensions.sliderRadius,
-              backgroundColor: this.state.isOn
-                ? this.props.sliderOnColor
-                : this.props.sliderOffColor
+              backgroundColor: this.setBackgroundColor('slider')
             }}
           />
         </TouchableOpacity>
@@ -199,9 +212,15 @@ class FlipToggle extends React.Component {
 
 export default FlipToggle;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  buttonDisabled: {
+    backgroundColor: '#666'
+  },
+  sliderDisabled: {
+    backgroundColor: '#444'
   }
-});
+};
