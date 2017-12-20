@@ -25,6 +25,9 @@ export default class App extends Component<{}> {
             onToggle={() => {
               console.log();
             }}
+            onToggleLongPress={() => {
+              console.log('Long Press');
+            }}
           />
         </View>
         <View style={styles.item}>
@@ -35,10 +38,15 @@ export default class App extends Component<{}> {
             onToggle={() => {
               console.log();
             }}
+            onToggleLongPress={() => {
+              console.log('Long Press');
+            }}
           />
         </View>
         <View style={styles.item}>
-          <Text>Rounded Wide toggle button</Text>
+          <Text>
+            Rounded Wide toggle button which doesn't change state on long press
+          </Text>
           <FlipToggle
             buttonWidth={150}
             buttonHeight={25}
@@ -47,6 +55,10 @@ export default class App extends Component<{}> {
             offLabel={'nay!'}
             onToggle={() => {
               console.log();
+            }}
+            changeToggleStateOnLongPress={false}
+            onToggleLongPress={() => {
+              console.log('Long Press');
             }}
           />
         </View>
@@ -63,6 +75,9 @@ export default class App extends Component<{}> {
             sliderOffColor={'#fff'}
             onToggle={() => {
               console.log();
+            }}
+            onToggleLongPress={() => {
+              console.log('Long Press');
             }}
           />
         </View>
@@ -84,6 +99,9 @@ export default class App extends Component<{}> {
             onToggle={() => {
               console.log();
             }}
+            onToggleLongPress={() => {
+              console.log('Long Press');
+            }}
           />
         </View>
         <View style={styles.item}>
@@ -97,6 +115,9 @@ export default class App extends Component<{}> {
             labelStyle={{ fontSize: 62, color: 'green' }}
             onToggle={() => {
               console.log();
+            }}
+            onToggleLongPress={() => {
+              console.log('Long Press');
             }}
           />
         </View>
