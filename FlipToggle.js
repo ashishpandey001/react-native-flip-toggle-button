@@ -19,36 +19,9 @@ import {
 import PropTypes from 'prop-types';
 
 class FlipToggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    let labelStyle = {};
-    if (!this.props.labelStyle.fontSize) {
-      labelStyle = {
-        ...this.props.labelStyle,
-        fontSize: 0.1 * this.props.buttonWidth
-      };
-    } else {
-      labelStyle = { ...this.props.labelStyle };
-    }
-    this.state = {
-      isOn: this.props.isOn,
-      onLabel: this.props.onLabel,
-      offLabel: this.props.offLabel,
-      offsetX: new Animated.Value(0),
-      initialDirection: this.props.isOn ? { right: 0 } : { left: 0 },
-      buttonOnColor: this.props.buttonOnColor,
-      buttonOffColor: this.props.buttonOffColor,
-      sliderOnColor: this.props.sliderOnColor,
-      sliderOffColor: this.props.sliderOffColor,
-      dimensions: {},
-      labelStyle: labelStyle
-    };
-    this.calculateDimensions();
-  }
-
   static propTypes = {
-    isOn: PropTypes.bool,
+    value: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
     onLabel: PropTypes.string,
     offLabel: PropTypes.string,
     buttonOnColor: PropTypes.string,
@@ -69,7 +42,6 @@ class FlipToggle extends React.Component {
   };
 
   static defaultProps = {
-    isOn: false,
     disabled: false,
     buttonOnColor: '#000',
     buttonOffColor: '#000',
@@ -81,36 +53,84 @@ class FlipToggle extends React.Component {
     labelStyle: {
       color: 'white'
     },
-    changeToggleStateOnLongPress: true
+    changeToggleStateOnLongPress: true,
   };
 
-  calculateDimensions = () => {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    let labelStyle = {};
+    if (!this.props.labelStyle.fontSize) {
+      labelStyle = {
+        ...this.props.labelStyle,
+        fontSize: 0.1 * this.props.buttonWidth
+      };
+    } else {
+      labelStyle = { ...this.props.labelStyle };
+    }
+    this.labelStyle = labelStyle;
+    this.dimensions = this.calculateDimensions(this.props);
+    this.offsetX = new Animated.Value(0);
+    if (this.props.value) {
+      toValue = toValue = this.dimensions.buttonWidth - this.dimensions.translateX;
+    } else {
+      toValue = 0;
+    }
+    Animated.timing(this.offsetX, {
+      toValue: toValue,
+      duration: 0,
+    }).start();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.labelStyle.fontSize) {
+      labelStyle = {
+        ...nextProps.labelStyle,
+        fontSize: 0.1 * nextProps.buttonWidth
+      };
+    } else {
+      labelStyle = { ...nextProps.labelStyle };
+    }
+    this.labelStyle = labelStyle;
+    this.dimensions = this.calculateDimensions(nextProps);
+    if (nextProps.value) {
+      toValue = toValue = this.dimensions.buttonWidth - this.dimensions.translateX;
+    } else {
+      toValue = 0;
+    }
+    Animated.timing(this.offsetX, {
+      toValue: toValue,
+      duration: 300,
+    }).start();
+  }
+
+  calculateDimensions = (toggleProps) => {
     let sliderWidth = 0,
       sliderHeight = 0,
       sliderRadius = 0,
       margin = 0;
-    if (!this.props.sliderWidth && !this.props.sliderHeight) {
-      sliderWidth = sliderHeight = 0.9 * this.props.buttonHeight;
-    } else if (!this.props.sliderHeight) {
-      sliderWidth = this.props.sliderWidth;
-      sliderHeight = 0.9 * this.props.buttonHeight;
+    if (!toggleProps.sliderWidth && !toggleProps.sliderHeight) {
+      sliderWidth = sliderHeight = 0.9 * toggleProps.buttonHeight;
+    } else if (!toggleProps.sliderHeight) {
+      sliderWidth = toggleProps.sliderWidth;
+      sliderHeight = 0.9 * toggleProps.buttonHeight;
     } else {
-      sliderWidth = this.props.sliderWidth;
-      sliderHeight = this.props.sliderHeight;
+      sliderWidth = toggleProps.sliderWidth;
+      sliderHeight = toggleProps.sliderHeight;
     }
-    if (this.props.buttonRadius && !this.props.sliderRadius) {
-      sliderRadius = this.props.buttonRadius;
+    if (toggleProps.buttonRadius && !toggleProps.sliderRadius) {
+      sliderRadius = toggleProps.buttonRadius;
     } else {
-      sliderRadius = this.props.sliderRadius;
+      sliderRadius = toggleProps.sliderRadius;
     }
-    if (!this.props.margin) {
-      margin = parseInt(0.02 * this.props.buttonWidth);
+    if (!toggleProps.margin) {
+      margin = parseInt(0.02 * toggleProps.buttonWidth);
     }
     let dimensions = {
-      buttonWidth: this.props.buttonWidth,
-      buttonHeight: this.props.buttonHeight,
+      buttonWidth: toggleProps.buttonWidth,
+      buttonHeight: toggleProps.buttonHeight,
       buttonRadius: parseInt(
-        this.props.buttonRadius / 100 * this.props.buttonWidth
+        toggleProps.buttonRadius / 100 * toggleProps.buttonWidth
       ),
       sliderWidth: sliderWidth,
       sliderHeight: sliderHeight,
@@ -118,28 +138,11 @@ class FlipToggle extends React.Component {
       margin: margin,
       translateX: 2 * parseInt(margin) + sliderWidth
     };
-    this.state.dimensions = dimensions;
+    return dimensions;
   };
 
   toggleCommon = () => {
-    if (this.props.isOn)
-      toValue = this.state.isOn
-        ? -this.state.dimensions.buttonWidth + this.state.dimensions.translateX
-        : 0;
-    else
-      toValue = this.state.isOn
-        ? 0
-        : this.state.dimensions.buttonWidth - this.state.dimensions.translateX;
-    Animated.timing(this.state.offsetX, {
-      toValue: toValue,
-      duration: 300
-    }).start();
-    let newState = !this.state.isOn;
-    this.setState({
-      ...this.state,
-      isOn: newState
-    });
-    return newState;
+    return !this.props.value;
   };
 
   onTogglePress = () => {
@@ -148,7 +151,7 @@ class FlipToggle extends React.Component {
   };
 
   onToggleLongPress = () => {
-    let newState = this.state.isOn;
+    let newState = this.props.value;
     if (this.props.changeToggleStateOnLongPress) {
       newState = this.toggleCommon();
     }
@@ -160,7 +163,7 @@ class FlipToggle extends React.Component {
       let key = `${component}Disabled`;
       let { [key]: data } = styles;
       return data.backgroundColor;
-    } else if (this.state.isOn) {
+    } else if (this.props.value) {
       let key = `${component}OnColor`;
       let { [key]: data } = this.props;
       return data;
@@ -178,9 +181,9 @@ class FlipToggle extends React.Component {
           disabled={this.props.disabled}
           style={{
             justifyContent: 'center',
-            borderRadius: this.state.dimensions.buttonRadius,
-            height: this.state.dimensions.buttonHeight,
-            width: this.state.dimensions.buttonWidth,
+            borderRadius: this.dimensions.buttonRadius,
+            height: this.dimensions.buttonHeight,
+            width: this.dimensions.buttonWidth,
             backgroundColor: this.setBackgroundColor('button')
           }}
           activeOpacity={1}
@@ -188,19 +191,18 @@ class FlipToggle extends React.Component {
           onLongPress={this.onToggleLongPress}
         >
           {this.props.onLabel || this.props.offLabel ? (
-            <Text style={[{ alignSelf: 'center' }, this.state.labelStyle]}>
-              {this.state.isOn ? this.state.onLabel : this.state.offLabel}
+            <Text style={[{ alignSelf: 'center' }, this.props.labelStyle]}>
+              {this.props.value ? this.props.onLabel : this.props.offLabel}
             </Text>
           ) : null}
           <Animated.View
             style={{
-              margin: this.state.dimensions.margin,
-              transform: [{ translateX: this.state.offsetX }],
+              margin: this.dimensions.margin,
+              transform: [{ translateX: this.offsetX }],
               position: 'absolute',
-              ...this.state.initialDirection,
-              width: this.state.dimensions.sliderWidth,
-              height: this.state.dimensions.sliderHeight,
-              borderRadius: this.state.dimensions.sliderRadius,
+              width: this.dimensions.sliderWidth,
+              height: this.dimensions.sliderHeight,
+              borderRadius: this.dimensions.sliderRadius,
               backgroundColor: this.setBackgroundColor('slider')
             }}
           />
