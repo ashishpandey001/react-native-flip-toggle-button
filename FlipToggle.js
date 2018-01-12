@@ -79,6 +79,7 @@ class FlipToggle extends React.Component {
     Animated.timing(this.offsetX, {
       toValue: toValue,
       duration: 0,
+      useNativeDriver: true,
     }).start();
   }
 
@@ -101,6 +102,7 @@ class FlipToggle extends React.Component {
     Animated.timing(this.offsetX, {
       toValue: toValue,
       duration: 300,
+      useNativeDriver: true,
     }).start();
   }
 
