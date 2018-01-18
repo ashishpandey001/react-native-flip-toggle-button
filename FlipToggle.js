@@ -157,7 +157,9 @@ class FlipToggle extends React.Component {
     if (this.props.changeToggleStateOnLongPress) {
       newState = this.toggleCommon();
     }
-    this.props.onToggleLongPress(newState);
+    if (this.props.onToggleLongPress) {
+      this.props.onToggleLongPress(newState);
+    }
   };
 
   setBackgroundColor = component => {
