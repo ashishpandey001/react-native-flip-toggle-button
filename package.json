@@ -1,6 +1,6 @@
 {
   "name": "react-native-flip-toggle-button",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A cross-platform customisable toggle button built upon react-native's TouchableOpacity and Animated APIs",
   "main": "FlipToggle.js",
   "repository": "git@github.com:ashishpandey001/react-native-flip-toggle-button.git",
