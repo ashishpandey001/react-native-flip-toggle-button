@@ -6,7 +6,7 @@
  * @ashishpandey001
  */
 
-import React from 'react';
+import React from "react";
 import {
   Text,
   View,
@@ -14,9 +14,9 @@ import {
   Image,
   Animated,
   Easing
-} from 'react-native';
+} from "react-native";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 class FlipToggle extends React.Component {
   static propTypes = {
@@ -43,17 +43,17 @@ class FlipToggle extends React.Component {
 
   static defaultProps = {
     disabled: false,
-    buttonOnColor: '#000',
-    buttonOffColor: '#000',
-    sliderOnColor: '#dba628',
-    sliderOffColor: '#dba628',
+    buttonOnColor: "#000",
+    buttonOffColor: "#000",
+    sliderOnColor: "#dba628",
+    sliderOffColor: "#dba628",
     labelStyle: {},
     buttonRadius: 0,
     sliderRadius: 0,
     labelStyle: {
-      color: 'white'
+      color: "white"
     },
-    changeToggleStateOnLongPress: true,
+    changeToggleStateOnLongPress: true
   };
 
   constructor(props) {
@@ -72,14 +72,15 @@ class FlipToggle extends React.Component {
     this.dimensions = this.calculateDimensions(this.props);
     this.offsetX = new Animated.Value(0);
     if (this.props.value) {
-      toValue = toValue = this.dimensions.buttonWidth - this.dimensions.translateX;
+      toValue = toValue =
+        this.dimensions.buttonWidth - this.dimensions.translateX;
     } else {
       toValue = 0;
     }
     Animated.timing(this.offsetX, {
       toValue: toValue,
       duration: 0,
-      useNativeDriver: true,
+      useNativeDriver: true
     }).start();
   }
 
@@ -95,18 +96,19 @@ class FlipToggle extends React.Component {
     this.labelStyle = labelStyle;
     this.dimensions = this.calculateDimensions(nextProps);
     if (nextProps.value) {
-      toValue = toValue = this.dimensions.buttonWidth - this.dimensions.translateX;
+      toValue = toValue =
+        this.dimensions.buttonWidth - this.dimensions.translateX;
     } else {
       toValue = 0;
     }
     Animated.timing(this.offsetX, {
       toValue: toValue,
       duration: 300,
-      useNativeDriver: true,
+      useNativeDriver: true
     }).start();
   }
 
-  calculateDimensions = (toggleProps) => {
+  calculateDimensions = toggleProps => {
     let sliderWidth = 0,
       sliderHeight = 0,
       sliderRadius = 0,
@@ -127,6 +129,8 @@ class FlipToggle extends React.Component {
     }
     if (!toggleProps.margin) {
       margin = parseInt(0.02 * toggleProps.buttonWidth);
+    } else {
+      margin = toggleProps.margin;
     }
     let dimensions = {
       buttonWidth: toggleProps.buttonWidth,
@@ -184,18 +188,18 @@ class FlipToggle extends React.Component {
         <TouchableOpacity
           disabled={this.props.disabled}
           style={{
-            justifyContent: 'center',
+            justifyContent: "center",
             borderRadius: this.dimensions.buttonRadius,
             height: this.dimensions.buttonHeight,
             width: this.dimensions.buttonWidth,
-            backgroundColor: this.setBackgroundColor('button')
+            backgroundColor: this.setBackgroundColor("button")
           }}
           activeOpacity={1}
           onPress={this.onTogglePress}
           onLongPress={this.onToggleLongPress}
         >
           {this.props.onLabel || this.props.offLabel ? (
-            <Text style={[{ alignSelf: 'center' }, this.props.labelStyle]}>
+            <Text style={[{ alignSelf: "center" }, this.props.labelStyle]}>
               {this.props.value ? this.props.onLabel : this.props.offLabel}
             </Text>
           ) : null}
@@ -203,11 +207,11 @@ class FlipToggle extends React.Component {
             style={{
               margin: this.dimensions.margin,
               transform: [{ translateX: this.offsetX }],
-              position: 'absolute',
+              position: "absolute",
               width: this.dimensions.sliderWidth,
               height: this.dimensions.sliderHeight,
               borderRadius: this.dimensions.sliderRadius,
-              backgroundColor: this.setBackgroundColor('slider')
+              backgroundColor: this.setBackgroundColor("slider")
             }}
           />
         </TouchableOpacity>
@@ -220,13 +224,13 @@ export default FlipToggle;
 
 const styles = {
   container: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center"
   },
   buttonDisabled: {
-    backgroundColor: '#666'
+    backgroundColor: "#666"
   },
   sliderDisabled: {
-    backgroundColor: '#444'
+    backgroundColor: "#444"
   }
 };
