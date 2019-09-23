@@ -54,7 +54,7 @@ Then, use the FlipToggle component as shown below
 |onToggle|function|yes|n/a|function that will be executed after toggle state is changed, returns the new state of the toggle|
 |onToggleLongPress|function|no|no|function that will be executed after toggle button is long pressed, returns the new state of the toggle|
 |changeToggleStateOnLongPress|boolean|no|true|flag to set whether state of the toggle button should be updated on long press|
-|disabled|boolean|no|false|flag to disable the flip toggle button|
+|disabled|boolean|no|false|flag to disable the toggling of the flip toggle button|
 |buttonRadius|number (0 - 100)|no|0|border radius of the flip toggle button, expressed in terms of % of buttonWidth|
 |sliderWidth|number|no|90 % of buttonHeight|Width of the slider|
 |sliderHeight|number|no|90 % of buttonHeight|Height of the slider|
@@ -65,8 +65,12 @@ Then, use the FlipToggle component as shown below
 |margin|number|no|2 % of the buttonWidth|margin / spacing between the flip toggle button and the slider|
 |buttonOnColor|'string'|no|'#000'|background color of the flip toggle button when it is on|
 |buttonOffColor|'string'|no|'#000'|background color of the flip toggle button when it is off|
+|disabledButtonOnColor|'string'|no|'#666'|background color of the flip toggle button when the toggling is disabled but set at on|
+|disabledButtonOffColor|'string'|no|'#666'|background color of the flip toggle button when the toggling is disabled but set at off|
 |sliderOnColor|'string'|no|'#dba628'|background color of the slider when it is on|
 |sliderOffColor|'string'|no|'#dba628'|background color of the slider when it is off|
+|disabledSliderOnColor|'string'|no|'#444'|background color of the slider when the toggling is disabled but set at on|
+|disabledSliderOffColor|'string'|no|'#444'|background color of the slider when the toggling is disabled but set at off|
 
 ## Issues
 If you face any issues with implementing this component or have a feature request or queries, please create a new [issue](https://github.com/ashishpandey001/react-native-flip-toggle-button/issues).

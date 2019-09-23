@@ -18,6 +18,8 @@ import {
 
 import PropTypes from 'prop-types';
 
+const capitalize = require('lodash.capitalize');
+
 class FlipToggle extends React.Component {
   static propTypes = {
     value: PropTypes.bool.isRequired,
@@ -26,8 +28,12 @@ class FlipToggle extends React.Component {
     offLabel: PropTypes.string,
     buttonOnColor: PropTypes.string,
     buttonOffColor: PropTypes.string,
+    disabledButtonOnColor: PropTypes.string,
+    disabledButtonOffColor: PropTypes.string,
     sliderOnColor: PropTypes.string,
     sliderOffColor: PropTypes.string,
+    disabledSliderOnColor: PropTypes.string,
+    disabledSliderOffColor: PropTypes.string,
     buttonWidth: PropTypes.number.isRequired,
     buttonHeight: PropTypes.number.isRequired,
     buttonRadius: PropTypes.number,
@@ -47,6 +53,10 @@ class FlipToggle extends React.Component {
     buttonOffColor: '#000',
     sliderOnColor: '#dba628',
     sliderOffColor: '#dba628',
+    disabledButtonOnColor: '#666',
+    disabledButtonOffColor: '#666',
+    disabledSliderOnColor: '#444',
+    disabledSliderOffColor: '#444',
     labelStyle: {},
     buttonRadius: 0,
     sliderRadius: 0,
@@ -83,18 +93,19 @@ class FlipToggle extends React.Component {
     }).start();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.labelStyle.fontSize) {
+  componentDidUpdate(prevProps) {
+    const { props: currentProps } = this;
+    if (!currentProps.labelStyle.fontSize) {
       labelStyle = {
-        ...nextProps.labelStyle,
-        fontSize: 0.1 * nextProps.buttonWidth
+        ...currentProps.labelStyle,
+        fontSize: 0.1 * currentProps.buttonWidth
       };
     } else {
-      labelStyle = { ...nextProps.labelStyle };
+      labelStyle = { ...currentProps.labelStyle };
     }
     this.labelStyle = labelStyle;
-    this.dimensions = this.calculateDimensions(nextProps);
-    if (nextProps.value) {
+    this.dimensions = this.calculateDimensions(currentProps);
+    if (currentProps.value) {
       toValue = toValue = this.dimensions.buttonWidth - this.dimensions.translateX;
     } else {
       toValue = 0;
@@ -163,10 +174,14 @@ class FlipToggle extends React.Component {
   };
 
   setBackgroundColor = component => {
-    if (this.props.disabled) {
-      let key = `${component}Disabled`;
-      let { [key]: data } = styles;
-      return data.backgroundColor;
+    if (this.props.disabled && this.props.value) {
+      let key = `disabled${capitalize(component)}OnColor`;
+      let { [key]: data } = this.props;
+      return data;
+    } else if (this.props.disabled && !this.props.value) {
+      let key = `disabled${capitalize(component)}OffColor`;
+      let { [key]: data } = this.props;
+      return data;
     } else if (this.props.value) {
       let key = `${component}OnColor`;
       let { [key]: data } = this.props;
@@ -222,11 +237,5 @@ const styles = {
   container: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-  buttonDisabled: {
-    backgroundColor: '#666'
-  },
-  sliderDisabled: {
-    backgroundColor: '#444'
   }
 };

@@ -22,7 +22,8 @@
     "url": "https://github.com/ashishpandey001/react-native-flip-toggle-button/issues"
   },
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "lodash.capitalize": "^4.2.1"
   },
   "peerDependencies": {
     "react-native": ">=0.47.1"
