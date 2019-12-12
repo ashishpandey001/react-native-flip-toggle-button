@@ -28,6 +28,7 @@ class FlipToggle extends React.Component {
     offLabel: PropTypes.string,
     buttonOnColor: PropTypes.string,
     buttonOffColor: PropTypes.string,
+    accessibilityLabelComponent: PropTypes.string,
     disabledButtonOnColor: PropTypes.string,
     disabledButtonOffColor: PropTypes.string,
     sliderOnColor: PropTypes.string,
@@ -58,6 +59,7 @@ class FlipToggle extends React.Component {
     disabledSliderOnColor: '#444',
     disabledSliderOffColor: '#444',
     labelStyle: {},
+    accessibilityLabelComponent: '',
     buttonRadius: 0,
     sliderRadius: 0,
     labelStyle: {
@@ -197,6 +199,11 @@ class FlipToggle extends React.Component {
     return (
       <View style={[styles.container]}>
         <TouchableOpacity
+          accessible={true}
+          accessibilityLiveRegion={'assertive'}
+          accessibilityLabel={
+            this.props.disabled ? this.props.accessibilityLabelComponent + ' disabled toggle button' :
+              this.props.accessibilityLabelComponent + ', ' + (this.props.value ? 'On' : 'Off') + ', toggle button'}
           disabled={this.props.disabled}
           style={{
             justifyContent: 'center',
@@ -215,6 +222,7 @@ class FlipToggle extends React.Component {
             </Text>
           ) : null}
           <Animated.View
+
             style={{
               margin: this.dimensions.margin,
               transform: [{ translateX: this.offsetX }],
