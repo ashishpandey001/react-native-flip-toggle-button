@@ -2,13 +2,13 @@
 [![npm version](https://badge.fury.io/js/react-native-flip-toggle-button.svg)](https://badge.fury.io/js/react-native-flip-toggle-button)
 
 
-A cross-platform customisable toggle button built upon react-native's TouchableOpacity and Animated APIs.
+A cross-platform customisable accessible toggle button built upon react-native's TouchableOpacity and Animated APIs.
 
 
 ### Why flip toggle?
 
 Well, this toggle button  provides a label centered within the button which flips as per the toggle's on / off state.
-You have seen it on old iOS homescreen (swipe to unlock). react-native-flip-toggle-button uses Animated APIs useNativeDriver flag to offload animations from the JS thread and thus provide more responsive and seamless toggle transition even when the JS thread is busy. 
+You have seen it on old iOS homescreen (swipe to unlock). react-native-flip-toggle-button uses Animated APIs useNativeDriver flag to offload animations from the JS thread and thus provide more responsive and seamless toggle transition even when the JS thread is busy. It is now accessible also for talback on android or voice over on ios.
 
 ## Contents
 - Checkout this package on npm - [react-native-flip-toggle-button](https://www.npmjs.com/package/react-native-flip-toggle-button)
@@ -43,6 +43,7 @@ Then, use the FlipToggle component as shown below
     labelStyle={{ color: 'black' }}
     onToggle={(newState) => console.log(`toggle is ${this.state.isActive ? `on` : `off`}`)}
     onToggleLongPress={() => console.log('toggle long pressed!')}
+    accessibilityLabelComponent={PURPOSE_OF_TOGGLE_BUTTON}
   />
 ```
 ## API
@@ -71,6 +72,7 @@ Then, use the FlipToggle component as shown below
 |sliderOffColor|'string'|no|'#dba628'|background color of the slider when it is off|
 |disabledSliderOnColor|'string'|no|'#444'|background color of the slider when the toggling is disabled but set at on|
 |disabledSliderOffColor|'string'|no|'#444'|background color of the slider when the toggling is disabled but set at off|
+|accessibilityLabelComponent|'string'|no|''|purpose of the toggle button to be spoken by Talkback or Voice Over|
 
 ## Issues
 If you face any issues with implementing this component or have a feature request or queries, please create a new [issue](https://github.com/ashishpandey001/react-native-flip-toggle-button/issues).
