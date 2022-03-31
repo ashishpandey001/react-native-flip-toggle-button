@@ -13,7 +13,8 @@ import {
   TouchableOpacity,
   Image,
   Animated,
-  Easing
+  Easing, 
+  I18nManager,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -111,7 +112,7 @@ class FlipToggle extends React.Component {
       toValue = 0;
     }
     Animated.timing(this.offsetX, {
-      toValue: toValue,
+      toValue: I18nManager.isRTL?toValue *-1 :toValue,
       duration: 300,
       useNativeDriver: true,
     }).start();
